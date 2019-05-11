@@ -4,17 +4,23 @@ import ResultComponent from './ResultComponent.js';
 import KeyPadComponent from "./KeyPadComponent.js";
 
 class App extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
-            result: ""
+            count: 0,
+            result: "",
         }
     }
 
     onClick = button => {
-
-        if(button === "="){
+        //counter for button
+        this.increment()
+        //if button count is 5 reset
+        if(this.state.count > 3){
+            this.reset()
+        }
+        else if(button === "play"){
             this.calculate()
         }
 
@@ -29,25 +35,38 @@ class App extends Component {
         }
     };
 
-
+    increment = () => {
+        this.setState({ 
+            count: this.state.count+1
+        });
+    }
     calculate = () => {
-        //let checkResult = ''
-        //checkResult = this.state.result
-
-        try {
-            this.setState({
-                result: "Sorry. Your Numbers Don't Match. You lose 10 points. Play Again to win them back!",
-            })
-        } catch (e) {
-            this.setState({
-                result: "error"
-            })
-
-        }
+        let rand = this.randomCalc()
+        this.setState({
+            result: "Sorry. The number sequence is: " + rand + ". You lose 10 points. Play Again to win them back!"
+        })
     };
+
+    randomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    randomCalc = () => {
+        let randomlist= [];
+        for(let i = 0; i < 3; i++){
+            let num = this.randomInt(0,10);
+            randomlist.push(num);
+        }
+        console.log(randomlist)
+        return randomlist;
+
+    }
 
     reset = () => {
         this.setState({
+            count: 0,
             result: ""
         })
     };

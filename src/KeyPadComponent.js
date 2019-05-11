@@ -22,8 +22,8 @@ class KeyPadComponent extends Component {
 
 
                 <button name="0" onClick={e => this.props.onClick(e.target.name)}>0</button>
-                <button name="=" onClick={e => this.props.onClick(e.target.name)}>submit</button>
-                <button name="C" onClick={e => this.props.onClick(e.target.name)}>C</button><br/>
+                <button name="play" id="play" onClick={e => this.props.onClick(e.target.name)}>play</button>
+                {/* <button name="C" onClick={e => this.props.onClick(e.target.name)}>C</button><br/> */}
             </div>
         );
     }
